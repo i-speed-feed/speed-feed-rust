@@ -5,7 +5,7 @@ pub struct OoklaAnalyzer {
 }
 
 impl OoklaAnalyzer {
-    fn new() -> OoklaAnalyzer {
+    pub fn new() -> OoklaAnalyzer {
         return OoklaAnalyzer { cli: String::from("ookla-cli") };
     }
 }

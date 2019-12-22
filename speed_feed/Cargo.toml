@@ -8,3 +8,4 @@ edition = "2018"
 
 [dependencies]
 speed_feed_analyzer_ookla = { path = "../speed_feed_analyzer_ookla" }
+speed_feed_analyzer = { path = "../speed_feed_analyzer" }
