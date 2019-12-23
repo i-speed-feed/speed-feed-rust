@@ -17,7 +17,7 @@ RUN ls -la
 
 RUN cargo build --release --target ${arch}
 
-FROM ${targetArch}/rust:1.40-alpine
+FROM arm32v7/rust:1.40-alpine
 
 COPY --from=builder target/${arch}/speed-feed /opt/speed-feed
 
