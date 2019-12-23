@@ -18,7 +18,7 @@ impl Analyzer for OoklaAnalyzer {
 
 #[cfg(test)]
 mod ookla_tests {
-    use speed_feed_analyzer::{Metrics, Analyzer};
+    use speed_feed_analyzer::{Analyzer};
     use crate::OoklaAnalyzer;
 
     #[test]
