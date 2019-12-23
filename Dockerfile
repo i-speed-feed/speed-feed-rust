@@ -13,11 +13,9 @@ RUN rustup target install ${arch}
 
 ADD . /opt/speed-feed
 
-RUN ls -la
-
 RUN cargo build --release --target ${arch}
 
-FROM ${targetArch}/rust:1.40
+FROM arm32v7/rust:1.40
 
 COPY --from=builder /opt/speed-feed/target/${arch}/speed-feed /opt/speed-feed
 
