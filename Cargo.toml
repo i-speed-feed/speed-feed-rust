@@ -1,6 +1,2 @@
 [workspace]
-name = "speed-feed"
-version = "0.1.0"
-authors = ["Felix Marezki <fmarezki@gmail.com>"]
-repository = "https://github.com/i-speed-feed/speed-feed-rust"
 members = ["speed_feed_analyzer", "speed_feed_analyzer_ookla", "speed_feed"]

@@ -1,8 +1,5 @@
 FROM rust:latest as builder
 
-ARG arch="armv7-unknown-linux-gnueabihf"
-ARG targetArch="arm32v7"
-
 WORKDIR /opt/speed-feed
 
 RUN apt-get update \
@@ -13,10 +10,12 @@ RUN rustup target install ${arch}
 
 ADD . /opt/speed-feed
 
-RUN cargo build --release --target ${arch}
+RUN cargo build --release --target armv7-unknown-linux-gnueabihf
+
+RUN ls -la /opt/speed-feed/target/armv7-unknown-linux-gnueabihf/release
 
 FROM arm32v7/rust:1.40
 
-COPY --from=builder /opt/speed-feed/target/${arch}/speed-feed /opt/speed-feed
+COPY --from=builder /opt/speed-feed/target/armv7-unknown-linux-gnueabihf/release/speed_feed /usr/bin/speed_feed
 
-CMD [ "/opt/speed-feed" ]
+CMD [ "speed_feed" ]
