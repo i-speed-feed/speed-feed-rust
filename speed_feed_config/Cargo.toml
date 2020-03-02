@@ -1,5 +1,5 @@
 [package]
-name = "speed_feed"
+name = "speed_feed_config"
 version = "0.1.0"
 authors = ["Felix Marezki <felix.marezki@exceet.de>"]
 edition = "2018"
@@ -7,12 +7,8 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-speed_feed_ookla = { path = "../speed_feed_ookla" }
-speed_feed_config = { path = "../speed_feed_config" }
-speed_feed_printer = { path = "../speed_feed_printer" }
 speed_feed_lib = { path = "../speed_feed_lib" }
-config = "0.9"
-clokwerk = "0.1.0"
+config = "0.10"
+eclectic = "0.11"
 log = "0.4"
 simple_logger = "1.6.0"
-clap = "2.33"
