@@ -18,9 +18,7 @@ jobs:
     - name: Run tests
       run: cargo test --verbose
     - name: Deploy
-      with:
-        balena_user: ${{ secrets.BALENA_USER }}
-        balena_ps: ${{ secrets.BALENA_PW }}
-      run:
-        - apt-get install npm
-        - npm install -g balena-cli
+      env:
+        BALENA_USER: ${{ secrets.BALENA_USER }}
+        BALENA_PW: ${{ secrets.BALENA_PW }}
+      run: ./.github/scripts/deploy.sh
