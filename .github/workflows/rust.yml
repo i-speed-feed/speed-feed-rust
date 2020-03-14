@@ -15,12 +15,12 @@ jobs:
     - uses: actions/checkout@v2
     - name: Prepare
       run: ./.github/scripts/prepare.sh
-    - name: Build
-      run: cargo build --verbose
     - name: Run Lib tests
       run: cd speed_feed_lib && cargo test --verbose && cd -
     - name: Run Ookla tests
       run: cd speed_feed_ookla && cargo test --verbose --features ci && cd -
+    - name: Build
+      run: cargo build --verbose
     - name: Deploy
       env:
         BALENA_USER: ${{ secrets.BALENA_USER }}
