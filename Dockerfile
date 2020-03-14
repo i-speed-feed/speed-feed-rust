@@ -6,7 +6,7 @@ RUN apt-get update \
     && apt-get install -y gcc-arm-linux-gnueabihf \
     binutils-arm-linux-gnueabihf
 
-RUN rustup target install ${arch} 
+RUN rustup target install armv7-unknown-linux-gnueabihf
 
 ADD . /opt/speed-feed
 

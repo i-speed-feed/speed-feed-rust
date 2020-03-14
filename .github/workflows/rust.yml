@@ -14,6 +14,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Prepare
+      env:
+        BALENA_USER: ${{ secrets.BALENA_USER }}
+        BALENA_PW: ${{ secrets.BALENA_PW }}
       run: ./.github/scripts/prepare.sh
     - name: Run Tests
       run: "cd speed_feed_lib && cargo test --verbose && cd - \
@@ -23,9 +26,6 @@ jobs:
             && cd speed_feed_scheduler && cargo test --verbose && cd - \
             && cd speed_feed_twitter && cargo test --verbose && cd - "
     - name: Build
-      run: cargo build --verbose --release
+      run: cargo build --target=armv7-unknown-linux-gnueabihf --verbose --release
     - name: Deploy
-      env:
-        BALENA_USER: ${{ secrets.BALENA_USER }}
-        BALENA_PW: ${{ secrets.BALENA_PW }}
-      run: ./.github/scripts/deploy.sh
+      run: ./balena/balena-cli/balena push speed_feed --source
