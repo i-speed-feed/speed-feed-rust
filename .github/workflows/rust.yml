@@ -17,14 +17,10 @@ jobs:
       run: ./.github/scripts/prepare.sh
     - name: Build
       run: cargo build --verbose
-
-  test:
     - name: Run Lib tests
       run: cd speed_feed_lib && cargo test --verbose && cd -
     - name: Run Ookla tests
       run: cd speed_feed_ookla && cargo test --verbose --features ci && cd -
-
-  deploy:
     - name: Deploy
       env:
         BALENA_USER: ${{ secrets.BALENA_USER }}
