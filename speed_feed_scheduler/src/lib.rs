@@ -1,6 +1,5 @@
 use log::{warn, info};
 use speed_feed_lib::{Plugin, System};
-use std::string::*;
 use std::thread;
 use std::time::Duration;
 
@@ -19,12 +18,12 @@ impl Plugin for SchedulerPlugin {
 
     fn run(&self, s: &mut System) {
         let interval = match s.config.get("scheduler.interval") {
-            Some(intervalString) => {
-                match intervalString.parse() {
+            Some(interval_string) => {
+                match interval_string.parse() {
                     Ok(interval) => interval,
                     _ => {
                         warn!("Value: {}, supplied for scheduler.interval cannot be parsed to a number.\n
-                    Falling back to default.", intervalString);
+                    Falling back to default.", interval_string);
                         DEFAULT_INTERVAL
                     }
                 }
