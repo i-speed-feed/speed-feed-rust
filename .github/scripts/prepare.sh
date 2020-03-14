@@ -4,6 +4,4 @@ wget https://bintray.com/ookla/download/download_file?file_path=ookla-speedtest-
 mkdir ookla
 tar -xf ookla.tgz -C ookla
 
-mv ookla/speedtest /usr/bin/speedtest
-
-speedtest
+./ookla/speedtest
