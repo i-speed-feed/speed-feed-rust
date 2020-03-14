@@ -29,4 +29,4 @@ FROM arm32v7/rust:1.40
 
 COPY --from=builder /opt/speed-feed/target/armv7-unknown-linux-gnueabihf/release/speed_feed /usr/bin/speed_feed
 
-CMD [ "speed_feed" ]
+CMD [ "speed_feed", "-vvv" ]
