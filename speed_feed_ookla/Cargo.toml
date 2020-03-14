@@ -4,6 +4,8 @@ version = "0.1.0"
 authors = ["Felix Marezki <felix.marezki@exceet.de>"]
 edition = "2018"
 
+[features]
+ci = []
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
