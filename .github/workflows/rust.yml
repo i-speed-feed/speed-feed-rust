@@ -25,7 +25,5 @@ jobs:
             && cd speed_feed_printer && cargo test --verbose && cd - \
             && cd speed_feed_scheduler && cargo test --verbose && cd - \
             && cd speed_feed_twitter && cargo test --verbose && cd - "
-    - name: Build
-      run: cargo build --target=armv7-unknown-linux-gnueabihf --verbose --release
     - name: Deploy
       run: ./balena/balena-cli/balena push speed_feed --source
