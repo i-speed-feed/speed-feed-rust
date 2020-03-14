@@ -44,7 +44,7 @@ impl Plugin for YamlConfig {
 
 #[cfg(test)]
 mod tests {
-    use speed_feed_lib::{System, Plugin};
+    use speed_feed_lib::{System};
     use crate::YamlConfig;
     use std::path::PathBuf;
 

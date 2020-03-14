@@ -4,6 +4,7 @@ use speed_feed_config::YamlConfig;
 use speed_feed_lib::System;
 use speed_feed_ookla::OoklaAnalyzer;
 use speed_feed_printer::Printer;
+use speed_feed_scheduler::SchedulerPlugin;
 
 fn main() {
     let opts = App::new("My Super Program")
@@ -39,6 +40,7 @@ fn main() {
     s.add(&YamlConfig {});
     s.add(&OoklaAnalyzer {});
     s.add(&Printer {});
+    s.add(&SchedulerPlugin {});
 
     match opts.value_of("config") {
         Some(config) => {

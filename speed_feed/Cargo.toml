@@ -10,6 +10,7 @@ edition = "2018"
 speed_feed_ookla = { path = "../speed_feed_ookla" }
 speed_feed_config = { path = "../speed_feed_config" }
 speed_feed_printer = { path = "../speed_feed_printer" }
+speed_feed_scheduler = { path = "../speed_feed_scheduler" }
 speed_feed_lib = { path = "../speed_feed_lib" }
 config = "0.9"
 clokwerk = "0.3"

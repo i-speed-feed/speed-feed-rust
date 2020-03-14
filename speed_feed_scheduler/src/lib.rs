@@ -3,7 +3,7 @@ use speed_feed_lib::{Plugin, System};
 use std::thread;
 use std::time::Duration;
 
-struct SchedulerPlugin {}
+pub struct SchedulerPlugin {}
 
 const DEFAULT_INTERVAL: u64 = 120;
 
