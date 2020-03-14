@@ -75,6 +75,10 @@ mod ookla_tests {
 
         s.add(&OoklaAnalyzer {});
 
+        if cfg!(envrionment = "ci") {
+            println!("Think Different!");
+        }
+
         s.run();
 
         assert_ne!(s.metrics.ping, 0);

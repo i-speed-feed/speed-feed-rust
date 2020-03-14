@@ -16,9 +16,9 @@ jobs:
     - name: Prepare
       run: ./.github/scripts/prepare.sh
     - name: Build
-      run: cargo build --verbose
+      run: cargo build --verbose --cfg environment=ci
     - name: Run tests
-      run: cargo test --verbose -- --test-threads=$(nproc)
+      run: cargo test --verbose --cfg environment=ci -- --test-threads=$(nproc)
     - name: Deploy
       env:
         BALENA_USER: ${{ secrets.BALENA_USER }}
