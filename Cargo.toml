@@ -1,2 +1,10 @@
 [workspace]
-members = ["speed_feed_lib", "speed_feed_config", "speed_feed_ookla", "speed_feed_twitter", "speed_feed_printer", "speed_feed"]
+members = [
+"speed_feed_lib",
+"speed_feed_config",
+"speed_feed_ookla",
+"speed_feed_scheduler",
+"speed_feed_twitter",
+"speed_feed_printer",
+"speed_feed"
+]

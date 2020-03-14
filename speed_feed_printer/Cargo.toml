@@ -8,3 +8,7 @@ edition = "2018"
 
 [dependencies]
 speed_feed_lib = { path = "../speed_feed_lib" }
+log = "0.4"
+
+[dev-dependencies]
+simple_logger = "1.6"

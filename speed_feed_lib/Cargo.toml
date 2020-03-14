@@ -9,3 +9,6 @@ edition = "2018"
 [dependencies]
 eclectic = "0.11"
 log = "0.4"
+
+[dev-dependencies]
+simple_logger = "1.6"

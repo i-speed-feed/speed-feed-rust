@@ -9,7 +9,7 @@ impl OoklaAnalyzer {
 
 impl Plugin for OoklaAnalyzer {
     fn name(&self) -> &'static str {
-        "Ookla Analyzer"
+        "Speed :: Feed :: Ookla"
     }
 
     fn prio(&self) -> u32 {
@@ -43,17 +43,19 @@ impl Plugin for OoklaAnalyzer {
 #[cfg(test)]
 mod ookla_tests {
     use crate::OoklaAnalyzer;
+    use log::Level;
+    use simple_logger;
     use speed_feed_lib::System;
 
     #[test]
-    fn test_analyze() {
+    fn test_ookla_plugin() {
+        let _ = simple_logger::init_with_level(Level::Debug);
+
         let mut s = System::new();
 
         s.add(&OoklaAnalyzer {});
 
         s.run();
-
-        println!("{:?}", s.metrics);
 
         assert_ne!(s.metrics.ping, 0);
         assert_ne!(s.metrics.up, 0);

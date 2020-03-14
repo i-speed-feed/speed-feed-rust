@@ -10,3 +10,7 @@ edition = "2018"
 speed_feed_lib = { path = "../speed_feed_lib" }
 jsonpath_lib = "0.2.4"
 ajson = "0.2.3"
+log = "0.4"
+
+[dev-dependencies]
+simple_logger = "1.6"

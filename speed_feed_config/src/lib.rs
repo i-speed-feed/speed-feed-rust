@@ -8,7 +8,7 @@ pub struct YamlConfig {}
 
 impl Plugin for YamlConfig {
     fn name(&self) -> &'static str {
-        "Yaml Config Plugin"
+        "Speed :: Feed :: Config"
     }
 
     fn prio(&self) -> u32 {
@@ -49,7 +49,7 @@ mod tests {
     use std::path::PathBuf;
 
     #[test]
-    fn test_config() {
+    fn test_config_plugin() {
         simple_logger::init().unwrap();
 
         let mut d = PathBuf::from(env!("CARGO_MANIFEST_DIR"));

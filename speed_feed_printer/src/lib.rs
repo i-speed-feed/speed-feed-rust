@@ -4,7 +4,7 @@ pub struct Printer {}
 
 impl Plugin for Printer {
     fn name(&self) -> &'static str {
-        "Simple Printer"
+        "Speed :: Feed :: Printer"
     }
 
     fn prio(&self) -> u32 {
@@ -18,17 +18,20 @@ impl Plugin for Printer {
     }
 }
 
-
 #[cfg(test)]
 mod tests {
-    use speed_feed_lib::System;
     use crate::Printer;
+    use log::Level;
+    use simple_logger;
+    use speed_feed_lib::System;
 
     #[test]
-    fn it_works() {
+    fn test_printer_plugin() {
+        let _ = simple_logger::init_with_level(Level::Debug);
+
         let mut s = System::new();
 
-        s.add(&Printer{});
+        s.add(&Printer {});
 
         s.run();
     }

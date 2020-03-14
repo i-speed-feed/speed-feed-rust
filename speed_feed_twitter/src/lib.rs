@@ -4,7 +4,7 @@
 #[cfg(test)]
 mod tests {
     #[test]
-    fn it_works() {
+    fn test_twitter_plugin() {
         assert_eq!(2 + 2, 4);
     }
 }

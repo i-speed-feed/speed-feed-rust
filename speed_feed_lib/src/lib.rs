@@ -54,6 +54,14 @@ impl<'l> System<'l> {
         });
     }
 
+    pub fn runFrom(&mut self, prio: u32) {
+        self.plugins.clone().iter_mut().filter(|plugin| plugin.prio() <= prio)
+            .for_each(|plugin| {
+                info!("Running: {}", plugin.name());
+                plugin.run(self);
+            });
+    }
+
     pub fn add(&mut self, p: &'l dyn Plugin) {
         self.plugins.insert(self.find_spot(p.prio()), p);
     }
@@ -68,11 +76,16 @@ impl<'l> System<'l> {
 #[cfg(test)]
 mod tests {
     use std::any::Any;
+    use log::Level;
+    use simple_logger;
     use crate::{System, Printable, Metrics, Plugin};
 
     struct SimplePlugin {
         x: &'static str,
         prio: u32,
+        ping: u64,
+        up: u64,
+        down: u64,
     }
 
     impl Plugin for SimplePlugin {
@@ -85,24 +98,48 @@ mod tests {
         }
 
         fn run(&self, s: &mut System) {
-            s.metrics.ping = 10;
-            s.metrics.down = 50000;
-            s.metrics.up = 10000;
+            s.metrics.ping = self.ping;
+            s.metrics.down = self.down;
+            s.metrics.up = self.up;
         }
     }
 
     #[test]
     fn test_system() {
+        let _ = simple_logger::init_with_level(Level::Debug);
+
         let mut s = System::new();
 
-        s.add(&SimplePlugin { x: "bla", prio: 9 });
+        let mut plugin = &SimplePlugin {
+            x: "higher prio",
+            prio: 9,
+            ping: 10,
+            up: 10000,
+            down: 50000
+        };
+
+        s.add(plugin);
 
         s.run();
-
-        s.print();
 
         assert_eq!(s.metrics.ping, 10);
         assert_eq!(s.metrics.up, 10000);
         assert_eq!(s.metrics.down, 50000);
+
+        let mut plugin2 = &SimplePlugin {
+            x: "lower prio",
+            prio: 4,
+            ping: 5,
+            up: 10,
+            down: 50
+        };
+
+        s.add(plugin2);
+
+        s.runFrom(7);
+
+        assert_eq!(s.metrics.ping, 5);
+        assert_eq!(s.metrics.up, 10);
+        assert_eq!(s.metrics.down, 50);
     }
 }
