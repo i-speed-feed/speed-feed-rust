@@ -54,13 +54,13 @@ impl<'l> System<'l> {
         });
     }
 
-    pub fn runFrom(&mut self, prio: u32) {
-        self.plugins.clone().iter_mut().filter(|plugin| plugin.prio() <= prio)
-            .for_each(|plugin| {
-                info!("Running: {}", plugin.name());
-                plugin.run(self);
-            });
-    }
+    // pub fn runFrom(&mut self, prio: u32) {
+    //     self.plugins.clone().iter_mut().filter(|plugin| plugin.prio() <= prio)
+    //         .for_each(|plugin| {
+    //             info!("Running: {}", plugin.name());
+    //             plugin.run(self);
+    //         });
+    // }
 
     pub fn add(&mut self, p: &'l dyn Plugin) {
         self.plugins.insert(self.find_spot(p.prio()), p);
@@ -126,20 +126,20 @@ mod tests {
         assert_eq!(s.metrics.up, 10000);
         assert_eq!(s.metrics.down, 50000);
 
-        let mut plugin2 = &SimplePlugin {
-            x: "lower prio",
-            prio: 4,
-            ping: 5,
-            up: 10,
-            down: 50
-        };
+        // let mut plugin2 = &SimplePlugin {
+        //     x: "lower prio",
+        //     prio: 4,
+        //     ping: 5,
+        //     up: 10,
+        //     down: 50
+        // };
 
-        s.add(plugin2);
+        // s.add(plugin2);
 
-        s.runFrom(7);
+        // s.runFrom(7);
 
-        assert_eq!(s.metrics.ping, 5);
-        assert_eq!(s.metrics.up, 10);
-        assert_eq!(s.metrics.down, 50);
+        // assert_eq!(s.metrics.ping, 5);
+        // assert_eq!(s.metrics.up, 10);
+        // assert_eq!(s.metrics.down, 50);
     }
 }

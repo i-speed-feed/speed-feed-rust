@@ -76,7 +76,7 @@ mod ookla_tests {
         s.add(&OoklaAnalyzer {});
 
         if cfg!(feature = "ci") {
-            s.config.insert(String::from("ookla.cli"), String::from("ookla/speedtest"));
+            s.config.insert(String::from("ookla.cli"), String::from("./ookla/speedtest"));
         }
 
         s.run();
