@@ -1,4 +1,6 @@
+use log::{error, info, warn};
 use speed_feed_lib::*;
+use std::option::*;
 use std::process::Command;
 
 pub struct OoklaAnalyzer {}
@@ -17,24 +19,42 @@ impl Plugin for OoklaAnalyzer {
     }
 
     fn run(&self, s: &mut System) {
-        let output = Command::new(OoklaAnalyzer::CLI)
-            .arg("--format=json")
-            .output()
-            .expect("Ookla analyzer failed to execute");
+        let cli = match s.config.get("ookla.cli") {
+            Some(cli) => cli,
+            _ => {
+                warn!("No value for ookla.cli specified. Falling back to default.");
+                OoklaAnalyzer::CLI
+            }
+        };
 
-        let json = ajson::parse(
-            String::from_utf8(output.stdout).expect("Ookla output i not UTF-8").as_str()
-        ).expect("Ookla output cannot be parsed to json");
+        let mut command = Command::new(cli);
 
-        s.metrics.ping = json.get("ping.latency")
+        command.arg("--format=json").arg("--accept-license");
+
+        info!("Running Ookla: {:?}", command);
+
+        let output = match command.output() {
+            Err(e) => {
+                warn!("Error while running Ookla: {}", e);
+                String::from("")
+            }
+            Ok(output) => String::from_utf8(output.stdout).expect("Ookla output i not UTF-8"),
+        };
+
+        let json = ajson::parse(output.as_str()).expect("Ookla output cannot be parsed to json");
+
+        s.metrics.ping = json
+            .get("ping.latency")
             .expect("Ookla analyzer has no ping value")
             .to_u64();
 
-        s.metrics.down = json.get("download.bandwidth")
+        s.metrics.down = json
+            .get("download.bandwidth")
             .expect("Ookla analyzer has no download value")
             .to_u64();
 
-        s.metrics.up = json.get("upload.bandwidth")
+        s.metrics.up = json
+            .get("upload.bandwidth")
             .expect("Ookla analyzer has no upload value")
             .to_u64();
     }
