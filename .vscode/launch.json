@@ -27,6 +27,9 @@
             "type": "lldb",
             "request": "launch",
             "name": "Debug unit tests in library 'speed_feed_config'",
+            "env": {
+                "SPEED_FEED_TEST": "VALUE"
+            },
             "cargo": {
                 "args": [
                     "test",

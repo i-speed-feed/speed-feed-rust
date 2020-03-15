@@ -1,5 +1,6 @@
 use clap::{App, Arg};
 use log::Level;
+use std::env::*;
 use speed_feed_config::YamlConfig;
 use speed_feed_lib::System;
 use speed_feed_ookla::OoklaAnalyzer;
@@ -41,6 +42,14 @@ fn main() {
     s.add(&OoklaAnalyzer {});
     s.add(&Printer {});
     s.add(&SchedulerPlugin {});
+
+    match var("SPEED_FEED_CONFIG") {
+        Ok(c) => {
+            s.config
+                .insert(String::from("config"), c);
+        },
+        _ => {}
+    }
 
     match opts.value_of("config") {
         Some(config) => {
